@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Younes Boufouss</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside>
+        <div class="sidebar-name"><a href="index.html">Younes Boufouss</a></div>
+        <nav>
+            <a href="index.html#about">About</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="index.html#socials">Socials</a>
+        </nav>
+    </aside>
+
+    <main>
+
+        <section>
+            <h2>Environment Design</h2>
+            <p>3D environments created with Blender.</p>
+
+            <div class="viewer-gallery">
+                <div class="viewer-main">
+                    <button class="viewer-prev" aria-label="Previous">&lsaquo;</button>
+                    <img src="img/env-design/01.png" alt="Environment Design" class="viewer-img">
+                    <button class="viewer-next" aria-label="Next">&rsaquo;</button>
+                    <!--  <div class="viewer-caption">Title — short description</div> -->
+                </div>
+                <div class="viewer-thumbs">
+                    <img src="img/env-design/01.png" alt="Thumbnail" data-caption="Title — short description" class="thumb active">
+                    <img src="img/env-design/02.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">
+                    <img src="img/env-design/03.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">
+                    <img src="img/env-design/04.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">
+                    <img src="img/env-design/05.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">
+                    <img src="img/env-design/06.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">
+                    <img src="img/env-design/07.png" alt="Thumbnail" data-caption="Title — short description" class="thumb">    
+                    
+                    <!-- Add more thumbnails here -->
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Tools</h2>
+            <div class="tools">
+                <div class="tool">
+                    <img src="img/icons/blender.svg" alt="Blender" class="tool-icon">
+                    <div class="tool-info">
+                        <strong>Blender</strong>
+                        <span>3D Modeling, Texturing, Lighting, Animation</span>
+                    </div>
+                </div>
+                <div class="tool">
+                    <img src="img/icons/photoshop.svg" alt="Photoshop" class="tool-icon">
+                    <div class="tool-info">
+                        <strong>Photoshop</strong>
+                        <span>Graphic Design, Photo Manipulation, Color Grading</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Lightbox overlay -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous">&lsaquo;</button>
+    <img src="" alt="" class="lightbox-img" id="lightbox-img">
+    <button class="lightbox-next" aria-label="Next">&rsaquo;</button>
+</div>
+
+<script src="portfolio.js"></script>
+
+</body>
+</html>

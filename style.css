@@ -1,3 +1,12 @@
+/* Font */
+@font-face {
+    font-family: "Morganite";
+    src: url("fonts/font.otf") format("opentype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Reset */
 *, *::before, *::after {
     margin: 0;
@@ -15,7 +24,7 @@ body {
 /* Layout: sidebar + main */
 .layout {
     display: flex;
-    max-width: 1060px;
+    max-width: 1300px;
     margin: 0 auto;
     min-height: 100vh;
 }
@@ -32,10 +41,22 @@ aside {
 }
 
 .sidebar-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
     margin-bottom: 2rem;
+}
+
+.sidebar-name a {
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.sidebar-name a:hover {
+    text-decoration: none;
 }
 
 aside nav {
@@ -58,15 +79,15 @@ aside nav a:hover {
 main {
     flex: 1;
     padding: 2.5rem 3rem;
-    max-width: 840px;
+    max-width: none;
 }
 
-/* Headings — bold sans-serif contrast */
+/* Headings */
 h2 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     margin-bottom: 1rem;
     padding-bottom: 0.4rem;
@@ -74,9 +95,9 @@ h2 {
 }
 
 h3 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
     margin-bottom: 0.25rem;
 }
 
@@ -91,6 +112,26 @@ section p {
 
 em {
     font-style: italic;
+}
+
+/* Courses */
+.courses {
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* Education */
+.edu-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+}
+
+.edu-line em {
+    white-space: nowrap;
+    color: #555;
 }
 
 /* Projects */
@@ -124,6 +165,58 @@ em {
 
 .project a:hover {
     color: #0366d6;
+}
+
+.gh-link {
+    color: #555;
+    vertical-align: middle;
+    margin-left: 0.4rem;
+}
+
+.gh-link:hover {
+    color: #000;
+}
+
+.tools {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.tool {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    flex: 1;
+}
+
+.tool-icon {
+    height: 3rem;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.tool-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-info strong {
+    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.tool-info span {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.15rem;
+}
+
+.gh-link svg {
+    vertical-align: -0.15em;
 }
 
 /* Gallery */
@@ -167,8 +260,16 @@ section ul {
 }
 
 section ul li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+section ul li svg {
+    flex-shrink: 0;
+    color: #555;
 }
 
 /* Footer */
@@ -178,6 +279,143 @@ footer {
     border-top: 1px solid #ddd;
     font-size: 0.85rem;
     color: #888;
+}
+
+/* Environment Design Viewer */
+.viewer-gallery {
+    margin-top: 1rem;
+}
+
+.viewer-main {
+    position: relative;
+    background: #0a0a0a;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.viewer-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.viewer-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.6rem 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #eee;
+    font-size: 0.85rem;
+}
+
+.viewer-prev,
+.viewer-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    z-index: 2;
+    line-height: 1;
+}
+
+.viewer-prev:hover,
+.viewer-next:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.viewer-prev { left: 0; }
+.viewer-next { right: 0; }
+
+.viewer-thumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+}
+
+.viewer-thumbs .thumb {
+    width: 90px;
+    height: 56px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.viewer-thumbs .thumb.active {
+    border-color: #1a1a1a;
+    opacity: 1;
+}
+
+.viewer-thumbs .thumb:hover {
+    opacity: 0.85;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 0 1rem;
+    line-height: 1;
+}
+
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    color: #ccc;
 }
 
 /* Mobile: sidebar becomes top bar */
