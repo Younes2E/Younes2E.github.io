@@ -1,4 +1,4 @@
-/* Reset minimal */
+/* Reset */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -6,86 +6,137 @@
 }
 
 body {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
     line-height: 1.7;
-    color: #222;
+    color: #1a1a1a;
     background: #fff;
-    max-width: 720px;
+}
+
+/* Layout: sidebar + main */
+.layout {
+    display: flex;
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    min-height: 100vh;
 }
 
-/* Header */
-header {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 1.5rem;
+/* Sidebar */
+aside {
+    width: 220px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.5rem;
+    border-right: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
-header h1 {
-    font-size: 1.8rem;
-    font-weight: normal;
+.sidebar-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
 }
 
-header p {
-    color: #555;
-    margin-top: 0.25rem;
+aside nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
 }
 
-nav {
-    margin-top: 1rem;
-}
-
-nav a {
-    margin-right: 1.5rem;
-    color: #222;
+aside nav a {
+    color: #444;
     text-decoration: none;
-    border-bottom: 1px solid #aaa;
+    font-size: 0.95rem;
 }
 
-nav a:hover {
-    border-bottom-color: #222;
+aside nav a:hover {
+    color: #000;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 2.5rem 3rem;
+    max-width: 840px;
+}
+
+/* Headings — bold sans-serif contrast */
+h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 }
 
 /* Sections */
 section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.8rem;
 }
 
-h2 {
-    font-size: 1.3rem;
-    font-weight: normal;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.3rem;
+section p {
+    margin-bottom: 0.7rem;
 }
 
-h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.3rem;
+em {
+    font-style: italic;
 }
 
-/* Projets */
+/* Projects */
 .project {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid #eee;
+}
+
+.project:last-child {
+    border-bottom: none;
+}
+
+.year {
+    font-weight: 400;
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.project p {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.2rem;
 }
 
 .project a {
-    color: #444;
-    font-size: 0.9rem;
+    color: #666;
+    font-size: 0.85rem;
 }
 
-/* Galerie art */
+.project a:hover {
+    color: #0366d6;
+}
+
+/* Gallery */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+    margin-top: 0.8rem;
 }
 
 .gallery figure {
-    border: 1px solid #eee;
-    padding: 0.5rem;
+    border: 1px solid #ddd;
+    overflow: hidden;
 }
 
 .gallery img {
@@ -95,18 +146,19 @@ h3 {
 }
 
 .gallery figcaption {
+    padding: 0.5rem 0.7rem;
     font-size: 0.85rem;
-    color: #555;
-    margin-top: 0.5rem;
+    color: #666;
 }
 
 /* Links */
 a {
-    color: #1a0dab;
+    color: #0366d6;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #000;
+    text-decoration: underline;
 }
 
 /* Contact */
@@ -116,13 +168,40 @@ section ul {
 
 section ul li {
     margin-bottom: 0.4rem;
+    font-size: 0.95rem;
 }
 
 /* Footer */
 footer {
     margin-top: 3rem;
     padding-top: 1rem;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ddd;
     font-size: 0.85rem;
-    color: #777;
+    color: #888;
+}
+
+/* Mobile: sidebar becomes top bar */
+@media (max-width: 700px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    aside {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        padding: 1.5rem;
+    }
+
+    aside nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
 }

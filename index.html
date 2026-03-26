@@ -1,84 +1,114 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Younes — L3 Informatique</title>
+    <title>Younes Boufouss</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <h1>Younes</h1>
-    <p>Etudiant en L3 Informatique — Universite Paris-Saclay</p>
-    <nav>
-        <a href="#a-propos">A propos</a>
-        <a href="#projets">Projets</a>
-        <a href="#art">Art 3D</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+<div class="layout">
 
-<main>
+    <aside>
+        <div class="sidebar-name">Younes Boufouss</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#art">3D Art</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </aside>
 
-    <section id="a-propos">
-        <h2>A propos</h2>
-        <p>
-            Je suis etudiant en troisieme annee de licence Informatique a l'Universite Paris-Saclay.
-            Ce site regroupe mes projets academiques et personnels.
-        </p>
-    </section>
+    <main>
 
-    <section id="projets">
-        <h2>Projets</h2>
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                I am a third-year Computer Science student at <em>Universite Paris-Saclay</em>
+                with strong foundations in Algorithmics and Machine Learning.
+                I am also interested in Computer Graphics and 3D Art.
+            </p>
+            <p>
+                <strong>Education:</strong> Bachelor's of Science, Computer Science — Universite Paris-Saclay (2023 – 2026)
+            </p>
+            <p>
+                <strong>Programming:</strong> Python, Java, OCaml, C, C++, C#, HTML/CSS<br>
+                <strong>AI & Data Science:</strong> NumPy, Matplotlib, Pandas, Scikit-Learn, SQL<br>
+                <strong>Computer Graphics:</strong> Blender, VFX, 3D Modeling, Environment Design<br>
+                <strong>Design:</strong> Adobe Photoshop, Adobe After Effects
+            </p>
+        </section>
 
-        <div class="project">
-            <h3>Nom du projet</h3>
-            <p>Description courte du projet. Technologies utilisees, objectif, etc.</p>
-            <p><a href="#">Code source</a></p>
-        </div>
+        <section id="projects">
+            <h2>Projects</h2>
 
-        <div class="project">
-            <h3>Autre projet</h3>
-            <p>Description courte du projet.</p>
-            <p><a href="#">Code source</a></p>
-        </div>
+            <div class="project">
+                <h3>NLP & Predictive Typing <span class="year">In progress</span></h3>
+                <p>Real-time word suggestion engine based on an adaptive probabilistic model optimized with a Prefix Tree structure.</p>
+            </div>
 
-        <!-- Ajouter d'autres projets ici -->
-    </section>
+            <div class="project">
+                <h3>Computer Vision & Machine Learning <span class="year">2026</span></h3>
+                <p>American Sign Language prediction system. Hand tracking and gesture classification for real-time recognition via ML models.</p>
+                <p><a href="https://github.com/Younes2E/asl-machine-learning">github.com/Younes2E/asl-machine-learning</a></p>
+            </div>
 
-    <section id="art">
-        <h2>Art 3D</h2>
-        <p>Selection de mes creations 3D.</p>
+            <div class="project">
+                <h3>Multiplayer Game <span class="year">2025</span></h3>
+                <p>Java-based multiplayer board game. Object-oriented programming, design patterns, UML modeling.</p>
+                <p><a href="https://github.com/Younes2E/upsaclay-multiplayer-game">github.com/Younes2E/upsaclay-multiplayer-game</a></p>
+            </div>
 
-        <div class="gallery">
-            <figure>
-                <img src="img/art1.png" alt="Projet 3D 1">
-                <figcaption>Titre — description courte</figcaption>
-            </figure>
+            <div class="project">
+                <h3>3D Maze Game <span class="year">2025</span></h3>
+                <p>3D game using Processing (Java): Modeling, Shading, Texturing.</p>
+                <p><a href="https://github.com/Younes2E/upsaclay-maze-game">github.com/Younes2E/upsaclay-maze-game</a></p>
+            </div>
 
-            <figure>
-                <img src="img/art2.png" alt="Projet 3D 2">
-                <figcaption>Titre — description courte</figcaption>
-            </figure>
+            <div class="project">
+                <h3>Client-Server UDP/TCP <span class="year">2024</span></h3>
+                <p>C++ multi-client communication system.</p>
+                <p><a href="https://github.com/Younes2E/upsaclay-client-serveur">github.com/Younes2E/upsaclay-client-serveur</a></p>
+            </div>
 
-            <!-- Ajouter d'autres images ici -->
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <ul>
-            <li>Email : <a href="mailto:prenom.nom@universite-paris-saclay.fr">prenom.nom@universite-paris-saclay.fr</a></li>
-            <li>GitHub : <a href="https://github.com/Younes2E">github.com/Younes2E</a></li>
-        </ul>
-    </section>
+        <section id="art">
+            <h2>3D Art</h2>
+            <p>A selection of 3D scenes made with Blender — modeling, texturing, scene composition.</p>
 
-</main>
+            <div class="gallery">
+                <figure>
+                    <img src="img/art1.png" alt="3D Render 1">
+                    <figcaption>Title — short description</figcaption>
+                </figure>
 
-<footer>
-    <p>&copy; 2026 Younes</p>
-</footer>
+                <figure>
+                    <img src="img/art2.png" alt="3D Render 2">
+                    <figcaption>Title — short description</figcaption>
+                </figure>
+
+                <!-- Add more images here -->
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <ul>
+                <li>Email: <a href="mailto:younes.boufouss@universite-paris-saclay.fr">younes.boufouss@universite-paris-saclay.fr</a></li>
+                <li>GitHub: <a href="https://github.com/Younes2E">github.com/Younes2E</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/younes-boufouss">linkedin.com/in/younes-boufouss</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Younes Boufouss</p>
+        </footer>
+
+    </main>
+
+</div>
 
 </body>
 </html>
