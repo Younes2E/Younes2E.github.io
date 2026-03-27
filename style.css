@@ -445,6 +445,10 @@ footer {
         gap: 1rem;
     }
 
+    .tools {
+        flex-direction: column;
+    }
+
     main {
         padding: 1.5rem;
     }
