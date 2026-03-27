@@ -136,8 +136,8 @@ em {
 
 /* Projects */
 .project {
-    margin-bottom: 1.3rem;
-    padding-bottom: 1.3rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
     border-bottom: 1px solid #eee;
 }
 
@@ -217,6 +217,12 @@ em {
 
 .gh-link svg {
     vertical-align: -0.15em;
+}
+
+.uni-redirect {
+    font-size: 0.88rem;
+    color: #888;
+    margin-top: 0.8rem;
 }
 
 /* Gallery */
