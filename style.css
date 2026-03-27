@@ -84,20 +84,21 @@ main {
 
 /* Headings */
 h2 {
-    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.3rem;
-    font-weight: 900;
-    letter-spacing: 0.05em;
+    font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
+    color: #1E407C;
     margin-bottom: 1rem;
     padding-bottom: 0.4rem;
-    border-bottom: 2px solid #1a1a1a;
+    border-bottom: 2px solid #1E407C;
 }
 
 h3 {
-    font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
     font-size: 1rem;
-    font-weight: 900;
+    font-weight: bold;
     margin-bottom: 0.25rem;
 }
 
@@ -146,6 +147,7 @@ em {
 }
 
 .year {
+    font-family: "Computer Modern Serif", "Latin Modern Roman", "CMU Serif", Georgia, "Times New Roman", serif;
     font-weight: 400;
     color: #888;
     font-size: 0.9rem;
@@ -252,7 +254,7 @@ em {
 
 /* Links */
 a {
-    color: #0366d6;
+    color: #1E407C;
     text-decoration: none;
 }
 
