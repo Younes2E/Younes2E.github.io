@@ -1,103 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Younes Boufouss</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-section="">Younes Boufouss</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="wrap">
 
-<svg style="display:none">
-    <defs>
-        <path id="github-icon" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-    </defs>
-</svg>
+  <!-- header + nav are injected from site.js; the nav bar sticks to the top -->
+  <header id="site-header"></header>
+  <nav id="site-nav"></nav>
 
-<div class="layout">
+  <main>
 
-    <aside>
-        <div class="sidebar-name"><a href="index.html">Younes Boufouss</a></div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-<a href="portfolio.html">Portfolio</a>
-            <a href="#socials">Socials</a>
-        </nav>
-    </aside>
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <p>
+        One or two paragraphs about who you are and what you work on. Research
+        interests, the questions you care about, where you are based.
+      </p>
 
-    <main>
+      <p>
+        A second paragraph if needed: background, previous positions, degrees.
+      </p>
 
-        <section id="about">
-            <h2>About</h2>
-            <p>
-                I am a third-year Computer Science student at <em>Universite Paris-Saclay</em>.
-                I like working on Machine Learning projects in NLP and Computer Vision, I am interested in pursuing research in this field.
-                
-            </p>
-            <p>
-                Outside of my studies, I have been designing 3D environments in Blender for 7 years,
-                working on modeling, texturing, lighting, and scene composition. I also do graphic and motion design on Adobe Photoshop and After Effects.
-            </p>
-            <p style="margin-top:0.8rem;"><a href="data/Younes-Boufouss-Resume.pdf" target="_blank">View resume &rarr;</a></p>
-        </section>
+      <h2>Research interests</h2>
+      <ul>
+        <li>Interest one</li>
+        <li>Interest two</li>
+        <li>Interest three</li>
+      </ul>
 
-        <section id="projects">
-            <h2>Projects</h2>
+      <h2>News</h2>
+      <ul class="news">
+        <li><span class="date">Jul 2026</span><span>Something happened.</span></li>
+        <li><span class="date">Jan 2026</span><span>Something else happened.</span></li>
+      </ul>
+    </section>
 
-            <div class="project">
-                <h3>NLP & Predictive Typing</h3>
-                <p>Real-time word suggestion engine using a Noisy Channel Model and a Prefix Tree structure for information retrieval.</p>
-            </div>
+    <!-- ============ PUBLICATIONS ============ -->
+    <section id="publications">
+      <h2 class="section-title">Publications</h2>
 
-            <div class="project">
-                <h3>Computer Vision & Sign Language Recognition <a href="https://github.com/Younes2E/asl-machine-learning" class="gh-link" title="View on GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><use href="#github-icon"/></svg></a></h3>
-                <p>Real-time American Sign Language recognition from webcam using MediaPipe hand landmark extraction and an SVC classifier trained on normalized 3D coordinates.</p>
-            </div>
+      <!-- copy/paste one card per paper; swap the empty <div class="entry-teaser">
+           for <img class="entry-teaser" src="img/…" alt=""> when you have a figure -->
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Title of the paper</span>
+          <span class="authors">A. Author, <strong>Y. Boufouss</strong>, B. Author</span>
+          <span class="venue">Venue / arXiv, 2026</span>
+          <span class="links">
+            <a href="#">pdf</a>
+            <a href="#">arXiv</a>
+            <a href="#">code</a>
+          </span>
+        </div>
+      </div>
 
-            <h3 class="subsection">University Projects</h3>
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Title of the paper</span>
+          <span class="authors"><strong>Y. Boufouss</strong>, A. Author</span>
+          <span class="venue">Venue, 2026</span>
+          <span class="links">
+            <a href="#">pdf</a>
+            <a href="#">code</a>
+          </span>
+        </div>
+      </div>
+    </section>
 
-            <div class="project">
-                <h3>Forbidden Island <a href="https://github.com/Younes2E/upsaclay-multiplayer-game" class="gh-link" title="View on GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><use href="#github-icon"/></svg></a></h3>
-                <p>Cooperative board game for 2-4 players built in Java Swing. Object-oriented programming, design patterns, UML modeling.</p>
-                <p class="uni-tech">Java &middot; Swing &middot; MVC &middot; Observer pattern &middot; UML</p>
-            </div>
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
 
-            <div class="project">
-                <h3>3D Maze Game <a href="https://github.com/Younes2E/upsaclay-maze-game" class="gh-link" title="View on GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><use href="#github-icon"/></svg></a></h3>
-                <p>3D game developed using Processing (Java). Covers 3D modeling, shading, texturing and game model.</p>
-                <p class="uni-tech">Processing &middot; 3D rendering &middot; Shading &middot; Texturing</p>
-            </div>
+      <!-- copy/paste one card per project; swap the empty <div class="entry-teaser">
+           for <img class="entry-teaser" src="img/…" alt=""> when you have a figure -->
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Project name</span>
+          <span class="meta">2026 &middot; with collaborators</span>
+          <p class="small">
+            Two or three sentences: what the problem is, what you did, what came out
+            of it.
+          </p>
+          <span class="links">
+            <a href="#">code</a>
+            <a href="#">paper</a>
+            <a href="#">demo</a>
+          </span>
+        </div>
+      </div>
 
-            <div class="project">
-                <h3>Hop! <a href="https://github.com/Younes2E/upsaclay-hop-java" class="gh-link" title="View on GitHub"><svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><use href="#github-icon"/></svg></a></h3>
-                <p>Doodle Jump style game in Java with multiple levels and switchable themes.</p>
-                <p class="uni-tech">Java &middot; Swing</p>
-            </div>
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Project name</span>
+          <span class="meta">2026</span>
+          <p class="small">Short description.</p>
+          <span class="links">
+            <a href="#">code</a>
+          </span>
+        </div>
+      </div>
 
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Project name</span>
+          <span class="meta">2025</span>
+          <p class="small">Short description.</p>
+          <span class="links">
+            <a href="#">code</a>
+            <a href="#">demo</a>
+          </span>
+        </div>
+      </div>
 
+      <div class="entry entry--card">
+        <div class="entry-teaser"></div>
+        <div class="entry-body">
+          <span class="title">Project name</span>
+          <span class="meta">2025</span>
+          <p class="small">Short description.</p>
+          <span class="links">
+            <a href="#">code</a>
+          </span>
+        </div>
+      </div>
+    </section>
 
-        </section>
+  </main>
 
-
-        <section id="portfolio">
-            <h2>Portfolio</h2>
-            <p>I also create 3D scenes with Blender and graphic designs with Photoshop & After Effects.</p>
-            <p><a href="portfolio.html">View full portfolio &rarr;</a></p>
-        </section>
-
-        <section id="socials">
-            <h2>Socials</h2>
-            <ul>
-                <li><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:younesboufouss@outlook.fr">younesboufouss@outlook.fr</a></li>
-                <li><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> <a href="https://github.com/Younes2E">github.com/Younes2E</a></li>
-                <li><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> <a href="https://www.linkedin.com/in/younes-boufouss">linkedin.com/in/younes-boufouss</a></li>
-            </ul>
-        </section>
-
-    </main>
+  <footer id="site-footer"></footer>
 
 </div>
-
+<script src="site.js"></script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-section="Art">Art</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- header + nav are injected from site.js; the nav bar sticks to the top -->
+  <header id="site-header"></header>
+  <nav id="site-nav"></nav>
+
+  <main>
+    <p class="small muted">
+      Paragraph
+    </p>
+
+    <!-- one viewer: list an <img> per piece. Add a caption with
+         data-caption="…" on any image to show it overlaid. -->
+    <div class="carousel">
+      <img src="img/env-design/01.png" alt="">
+      <img src="img/env-design/02.png" alt="">
+      <img src="img/env-design/03.png" alt="">
+      <img src="img/env-design/04.jpg" alt="">
+      <img src="img/env-design/05.png" alt="">
+      <img src="img/env-design/06.png" alt="">
+      <img src="img/env-design/07.png" alt="">
+    </div>
+
+    <h2 class="section-title">Software</h2>
+    <ul class="software">
+      <li><img src="img/icons/blender.svg" alt=""> Blender</li>
+      <li><img src="img/icons/photoshop.svg" alt=""> Photoshop</li>
+    </ul>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+</div>
+<script src="site.js"></script>
+</body>
+</html>
