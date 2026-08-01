@@ -6,6 +6,9 @@
   --muted: #6b6b6b;
   --line: #e2e2e2;
   --link: #14539a;
+  /* the name stays serif; section titles + nav use plain Arial (a system
+     font, so nothing is downloaded); weight is set per element */
+  --display: Arial, "Helvetica Neue", Helvetica, sans-serif;
   /* header and body are each centred on the page axis; --prose caps text width */
   --measure: 100%;
   --prose: 60rem;
@@ -29,6 +32,8 @@ body {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 17px;
   line-height: 1.65;
+  /* long words (e.g. the email) wrap instead of forcing a horizontal scroll */
+  overflow-wrap: break-word;
 }
 
 .wrap {
@@ -163,8 +168,9 @@ nav {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding: .5rem 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: .85rem;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: .8rem;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -180,10 +186,11 @@ nav a:hover {
   text-decoration: none;
 }
 
-/* current page: bold + a solid accent bar underneath */
+/* current page: bold + darker + a solid accent bar underneath (other tabs
+   stay regular weight) */
 nav a.active {
   color: var(--text);
-  font-weight: bold;
+  font-weight: 700;
 }
 
 nav a.active::after {
@@ -225,10 +232,11 @@ main h2.section-title {
   margin: 3.5rem 0 1.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
-  font-size: 1.45rem;
-  font-weight: bold;
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
   font-style: normal;
-  letter-spacing: .01em;
+  letter-spacing: 0;
 }
 
 /* the section title owns the top gap, so its first sub-heading sits tight */
@@ -555,8 +563,22 @@ footer {
     display: block;
   }
 
+  /* smaller photo + name so the masthead fits a phone */
+  .avatar {
+    width: 84px;
+    height: 84px;
+  }
+
+  header h1 {
+    font-size: 1.75rem;
+  }
+
+  header .tagline {
+    font-size: .98rem;
+  }
+
   header .contact {
-    margin-top: .75rem;
+    margin-top: .85rem;
     text-align: left;
   }
 
@@ -564,13 +586,20 @@ footer {
     justify-content: flex-start;
   }
 
+  /* keep the sticky nav on one/two tidy rows */
   nav {
     justify-content: flex-start;
+    gap: 1rem;
+    font-size: .78rem;
   }
 
   nav a {
     display: inline-block;
     margin-bottom: .2rem;
+  }
+
+  main h2.section-title {
+    font-size: 1.2rem;
   }
 
   /* stack the entry card: teaser on top, text below */

@@ -30,11 +30,10 @@ var SITE = {
     { href: "index.html",              label: "About" },
     { href: "index.html#publications", label: "Publications" },
     { href: "index.html#projects",     label: "Projects" },
-    { href: "cv.html",                 label: "CV" },
     { href: "art.html",                label: "Art" }
   ],
 
-  footer: "Last updated: July 2026"
+  footer: "Last updated: August 2026"
 };
 
 /* ============================================================
@@ -148,7 +147,7 @@ var SITE = {
         a.classList.toggle("active", a.getAttribute("data-spy") === id);
       });
     }
-
+    
     var ticking = false;
     function update() {
       ticking = false;
