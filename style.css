@@ -1,7 +1,3 @@
-/* ============================================================
-   Tokens — the only place colours, fonts and page metrics live.
-   ============================================================ */
-
 :root {
   --bg: #ffffff;
   --text: rgba(0, 0, 0, .85);
@@ -9,24 +5,19 @@
   --line: #e2e2e2;
   --link: #3273dc;
   --link-hover: #363636;
-  --fill: #f0f0f0;              /* button / placeholder ground */
+  --fill: #f0f0f0;
   --fill-hover: #e2e2e2;
-
-  /* Noto Sans for running text, Google Sans for headings, nav and the
-     name, Roboto Slab for author lists. Each keeps a real fallback so
-     the page holds up if Google Fonts is blocked. */
   --body-font: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --display: "Google Sans", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
-
-  --pad: 2rem;                  /* page gutter, shared by the bar and content */
-  --pad-top: 1.5rem;            /* space above the name, on every page */
-  --prose: 72rem;               /* the centred content column */
-  --measure: 54rem;             /* cap on running text, for readability */
+  --pad: 2rem;
+  --pad-top: 1.5rem;
+  --prose: 72rem;
+  --measure: 54rem;
 }
 
 html {
-  color-scheme: light;          /* the site is light only */
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -63,13 +54,12 @@ img {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: var(--bg);       /* opaque: content scrolls under it */
+  background: var(--bg);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 2rem;
   padding: var(--pad-top) var(--pad);
-  /* closes the header, so it doesn't read as part of the text below */
   border-bottom: 1px solid var(--line);
   margin-bottom: 2rem;
 }
@@ -87,7 +77,6 @@ img {
   text-decoration: none;
 }
 
-/* the tabs */
 .site-bar nav {
   display: flex;
   flex-wrap: wrap;
@@ -111,7 +100,6 @@ img {
   font-weight: 700;
 }
 
-/* the icons take the leftover space, which pins them to the right edge */
 .site-bar .social {
   margin-left: auto;
 }
@@ -131,8 +119,6 @@ img {
   transform: translateY(-2px);
 }
 
-/* block, not inline: an inline SVG sits on the text baseline and carries
-   the descender space below it, padding the row's box */
 .social svg {
   display: block;
   width: 20px;
@@ -140,15 +126,9 @@ img {
   fill: currentColor;
 }
 
-/* brand colours on hover */
 .social .gh:hover { color: #181717; }
 .social .sc:hover { color: #4285f4; }
 .social .li:hover { color: #0a66c2; }
-
-/* ============================================================
-   Page body — a centred column. The gallery page opts out of this
-   and runs full-bleed instead.
-   ============================================================ */
 
 .page {
   max-width: var(--prose);
@@ -156,36 +136,18 @@ img {
   padding: 0 var(--pad) 5rem;
 }
 
-/* clear the sticky bar when jumping to a section anchor */
 section[id] {
   scroll-margin-top: 5.5rem;
 }
 
-/* running text stops before the line gets too long to track */
-p,
-ul,
-ol {
-  max-width: var(--measure);
-}
-
 p {
+  max-width: var(--measure);
   margin: 0 0 1rem;
-}
-
-ul {
-  margin: 0 0 1rem;
-  padding-left: 1.25rem;
-}
-
-li {
-  margin-bottom: .35rem;
 }
 
 .small {
   font-size: .9rem;
 }
-
-/* ---------- headings ---------- */
 
 h2 {
   margin: 2.5rem 0 .75rem;
@@ -194,7 +156,6 @@ h2 {
   font-weight: 600;
 }
 
-/* major section divider (Publications, Projects) */
 h2.section-title {
   margin: 3.5rem 0 1.25rem;
   padding-top: 1.5rem;
@@ -203,24 +164,12 @@ h2.section-title {
   font-weight: 700;
 }
 
-/* the first heading on a page owns no divider and no top gap */
 .page > .section-title:first-child,
 .page > :first-child > .section-title:first-child {
   margin-top: 0;
   padding-top: 0;
   border-top: none;
 }
-
-h3 {
-  margin: 1.5rem 0 .25rem;
-  font-family: var(--display);
-  font-size: .9rem;
-  font-weight: bold;
-}
-
-/* ============================================================
-   Entries — publications and projects.
-   ============================================================ */
 
 .entry {
   display: flex;
@@ -236,7 +185,6 @@ h3 {
   object-fit: contain;
 }
 
-/* placeholder look for an empty <div>; a real <img> just shows through */
 div.entry-teaser {
   background: var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 20' fill='%23c4c4c4'%3E%3Cpath d='M4 15l6-6 4 4 6-7 8 9z'/%3E%3Ccircle cx='11' cy='7' r='2'/%3E%3C/svg%3E") center / 45% no-repeat;
 }
@@ -267,9 +215,6 @@ div.entry-teaser {
   font-family: var(--serif);
 }
 
-/* A name that links to someone's page keeps the face and colour of the
-   names around it, so the line still reads as a list of people rather than
-   a row of blue links. Pointing at one is what gives it away. */
 .entry .authors a {
   color: inherit;
   text-decoration: none;
@@ -285,7 +230,6 @@ div.entry-teaser {
   color: var(--muted);
 }
 
-/* pill buttons: paper, code, poster… */
 .entry .links {
   display: flex;
   flex-wrap: wrap;
@@ -308,31 +252,16 @@ div.entry-teaser {
   text-decoration: none;
 }
 
-/* ============================================================
-   Art gallery — justified rows of images, plus a dark viewer.
-   ============================================================ */
-
-/* The art page's header: just the name, linking home. Flex like .site-bar,
-   so the name sits on the same baseline (as a plain inline box it would
-   drop a few pixels, offset by the half-leading). */
 .gallery-header {
   display: flex;
   align-items: center;
   padding: var(--pad-top) var(--pad) 0;
 }
 
-/* the gallery keeps the name's gutter on the sides, and the same gap above
-   it as the name has from the top of the page */
 .gallery-page {
   padding: var(--pad) var(--pad) 4rem;
 }
 
-/* Justified rows: each image keeps its own proportions, and every row is
-   scaled to fill the width exactly. site.js sizes the tiles; these two
-   numbers steer it.
-     --gap     space between images
-     --across  how many images to fit on a row. Fractional is fine: 2.5
-               gives rows of 2 and 3. Narrow screens drop to one per row. */
 .gallery {
   --gap: 4px;
   --across: 2.5;
@@ -341,12 +270,6 @@ div.entry-teaser {
   gap: var(--gap);
 }
 
-/* One row of images. site.js sets the row's height and gives each tile a
-   flex-grow equal to its aspect ratio; the browser then splits the row's
-   width in those proportions itself, to sub-pixel precision.
-   Nothing here is measured in pixels and nothing wraps, so a rounding
-   error can never drop a tile onto the next line — which is what broke
-   the old layout at anything other than 100% zoom. */
 .gallery-row {
   display: flex;
   gap: var(--gap);
@@ -360,21 +283,17 @@ div.entry-teaser {
   cursor: pointer;
 }
 
-/* in a row: share the width in proportion to flex-grow, set by site.js */
 .gallery-row .tile {
   flex-shrink: 1;
   flex-basis: 0;
   min-width: 0;
 }
 
-/* row-break markers are instructions, never anything to look at; site.js
-   removes them, this just covers the moment before it runs */
 .gallery br,
 .gallery .row-break {
   display: none;
 }
 
-/* before site.js runs, or if it never does: a plain full-width stack */
 .gallery:not(.is-justified) .tile {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -387,9 +306,6 @@ div.entry-teaser {
   object-fit: cover;
 }
 
-/* On hover the whole image dims a little and its title sits in the middle.
-   The veil is even rather than a bottom gradient, so the title reads the
-   same wherever the image happens to be light or dark. */
 .tile::after {
   content: attr(data-title);
   position: absolute;
@@ -413,16 +329,12 @@ div.entry-teaser {
   opacity: 1;
 }
 
-/* The note under the gallery: its rule spans the full width, while the
-   sentence inside keeps a readable line length. */
 .gallery-note {
   margin-top: 2.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--line);
 }
 
-/* full width, like the rule above it and the images above that — the
-   default cap on running text would leave it stranded on the left third */
 .gallery-note p {
   max-width: none;
   margin: 0;
@@ -430,12 +342,6 @@ div.entry-teaser {
   color: var(--muted);
 }
 
-/* ---------- full-screen viewer ---------- */
-
-/* A self-contained panel: its own bar, its own image, its own controls.
-   It carries the name itself rather than letting the page's header show
-   through — that header scrolls with the page, so it was only ever in the
-   right place when the gallery happened to be at the top. */
 .viewer {
   position: fixed;
   inset: 0;
@@ -443,8 +349,6 @@ div.entry-teaser {
   display: none;
   flex-direction: column;
   background: #1c1c1c;
-  /* no side gutter here: only the bar keeps one, so the image below can use
-     the full width of the screen */
   padding: var(--pad-top) 0 .75rem;
 }
 
@@ -452,8 +356,6 @@ div.entry-teaser {
   display: flex;
 }
 
-/* the name on the left, the × pushed to the right edge. The gutter matches
-   the page header's, so the name sits exactly where it did behind it. */
 .viewer-bar {
   display: flex;
   align-items: center;
@@ -485,8 +387,6 @@ div.entry-teaser {
   color: #fff;
 }
 
-/* the image takes whatever the bar and the arrows leave, with just enough
-   of a frame that it never touches the edges of the screen */
 .viewer-stage {
   flex: 1 1 auto;
   min-height: 0;
@@ -496,7 +396,6 @@ div.entry-teaser {
   padding: .75rem 1rem;
 }
 
-/* a light fade as each image arrives, so switching isn't an abrupt cut */
 .viewer-stage img {
   max-width: 100%;
   max-height: 100%;
@@ -509,7 +408,6 @@ div.entry-teaser {
   opacity: 1;
 }
 
-/* the two arrows, centred under the image */
 .viewer-controls {
   display: flex;
   justify-content: center;
@@ -532,10 +430,6 @@ div.entry-teaser {
   color: #fff;
 }
 
-/* ============================================================
-   Footer
-   ============================================================ */
-
 footer {
   max-width: var(--measure);
   margin-top: 4rem;
@@ -545,46 +439,35 @@ footer {
   color: var(--muted);
 }
 
-/* on the gallery page the footer runs the full width, like the images */
 .gallery-page footer {
   max-width: none;
 }
-
-/* ============================================================
-   Small screens
-   ============================================================ */
 
 @media (max-width: 560px) {
   :root {
     --pad: 1.25rem;
   }
-
   .site-bar {
     gap: 1rem;
   }
-
   .site-bar nav {
     gap: 1rem;
     font-size: .85rem;
   }
-
   h2.section-title {
     font-size: 1.5rem;
   }
-
-  /* stack the entry: teaser on top, text below */
   .entry {
     flex-direction: column;
   }
-
   .entry-teaser {
     width: 100%;
     max-width: 300px;
   }
+}
 
-  /* no hover on touch, so the gallery titles stay visible */
+@media (hover: none) {
   .tile::after {
-    opacity: 1;
+    display: none;
   }
-
 }

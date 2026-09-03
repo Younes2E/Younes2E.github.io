@@ -10,38 +10,12 @@
 </head>
 <body>
 
-  <!-- This page keeps its own minimal header: just the name, linking back
-       to the main site. Plain HTML, not built by site.js. -->
   <header class="gallery-header">
     <a class="site-name" href="index.html">Younes Boufouss</a>
   </header>
 
   <main class="gallery-page">
 
-    <!-- The gallery: one <a> per piece. To add one, copy a line and point it
-         at the new file in img/art/.
-
-         The title is written once, as the image's alt: site.js copies it onto
-         the tile, which is what shows on hover and in the viewer. So edit alt
-         and both follow.
-
-         Keep the width and height attributes accurate: they are the image's
-         real pixel size, and the row maths reads them before the file has
-         even loaded.
-
-         ROW BREAKS. By default the rows fill themselves — how many images
-         land on each one depends on their shapes and on --across in the CSS.
-         To settle a row yourself, drop a <br> between two tiles and it ends
-         there:
-
-             <a class="tile" ...></a>
-             <a class="tile" ...></a>
-             <br>                        <- this row holds two
-             <a class="tile" ...></a>
-
-         The two mix freely: mark only the breaks you care about, and the
-         images after them keep filling on their own. Either way every row is
-         stretched to fill the width exactly. -->
     <div class="gallery">
       <a class="tile" href="img/art/1.jpg"><img src="img/art/1.jpg" alt="" width="4096" height="2867" loading="lazy"></a>
       <a class="tile" href="img/art/2.png"><img src="img/art/2.png" alt="" width="1920" height="1080" loading="lazy"></a>
