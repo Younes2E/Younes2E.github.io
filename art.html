@@ -3,43 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-section="Art">Art</title>
+<title>Art · Younes Boufouss</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Roboto+Slab:400,700">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
 
-  <!-- header + nav are injected from site.js; the nav bar sticks to the top -->
-  <header id="site-header"></header>
-  <nav id="site-nav"></nav>
+  <!-- This page keeps its own minimal header: just the name, linking back
+       to the main site. Plain HTML, not built by site.js. -->
+  <header class="gallery-header">
+    <a class="site-name" href="index.html">Younes Boufouss</a>
+  </header>
 
-  <main>
-    <p class="small muted">
-      Paragraph
-    </p>
+  <main class="gallery-page">
 
-    <!-- one viewer: list an <img> per piece. Add a caption with
-         data-caption="…" on any image to show it overlaid. -->
-    <div class="carousel">
-      <img src="img/env-design/01.png" alt="">
-      <img src="img/env-design/02.png" alt="">
-      <img src="img/env-design/03.png" alt="">
-      <img src="img/env-design/04.jpg" alt="">
-      <img src="img/env-design/05.png" alt="">
-      <img src="img/env-design/06.png" alt="">
-      <img src="img/env-design/07.png" alt="">
+    <!-- The gallery: one <a> per piece. The data-title is what shows on
+         hover and in the viewer, so edit it freely; to add a piece, copy a
+         line and point it at the new file in img/art/. -->
+    <div class="gallery">
+      <a class="tile" href="img/art/1.jpg" data-title="Alley at Dusk"><img src="img/art/1.jpg" alt="Alley at Dusk" loading="lazy"></a>
+      <a class="tile" href="img/art/2.png" data-title="Backstreet"><img src="img/art/2.png" alt="Backstreet" loading="lazy"></a>
+      <a class="tile" href="img/art/8.png" data-title="Fire Escape"><img src="img/art/8.png" alt="Fire Escape" loading="lazy"></a>
+      <a class="tile" href="img/art/3.png" data-title="Rooftops"><img src="img/art/3.png" alt="Rooftops" loading="lazy"></a>
+      <a class="tile" href="img/art/6.jpg" data-title="Night Market"><img src="img/art/6.jpg" alt="Night Market" loading="lazy"></a>
+      <a class="tile" href="img/art/5.png" data-title="Underpass"><img src="img/art/5.png" alt="Underpass" loading="lazy"></a>
+      <a class="tile" href="img/art/4.png" data-title="Corner Store"><img src="img/art/4.png" alt="Corner Store" loading="lazy"></a>
+      <a class="tile" href="img/art/7.png" data-title="Fire Escape"><img src="img/art/7.png" alt="Fire Escape" loading="lazy"></a>
     </div>
 
-    <h2 class="section-title">Software</h2>
-    <ul class="software">
-      <li><img src="img/icons/blender.svg" alt=""> Blender</li>
-      <li><img src="img/icons/photoshop.svg" alt=""> Photoshop</li>
-    </ul>
+    <div class="gallery-note">
+      <p>
+        I may work in AI, but all of my art remains human-generated. 
+        <br>
+        I use Blender
+        for the modelling, texturing, lighting, and scene composition, and Photoshop
+        for sketching, texturing and color grading.
+      </p>
+    </div>
+
+    <footer>Last updated: August 2026</footer>
+
   </main>
 
-  <footer id="site-footer"></footer>
-
-</div>
 <script src="site.js"></script>
 </body>
 </html>

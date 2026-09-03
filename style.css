@@ -1,22 +1,32 @@
-/* ---------- base ---------- */
+/* ============================================================
+   Tokens — the only place colours, fonts and page metrics live.
+   ============================================================ */
 
 :root {
   --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
+  --text: rgba(0, 0, 0, .85);
+  --muted: rgba(0, 0, 0, .55);
   --line: #e2e2e2;
-  --link: #14539a;
-  /* the name stays serif; section titles + nav use plain Arial (a system
-     font, so nothing is downloaded); weight is set per element */
-  --display: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  /* header and body are each centred on the page axis; --prose caps text width */
-  --measure: 100%;
-  --prose: 60rem;
+  --link: #3273dc;
+  --link-hover: #363636;
+  --fill: #f0f0f0;              /* button / placeholder ground */
+  --fill-hover: #e2e2e2;
+
+  /* Noto Sans for running text, Google Sans for headings, nav and the
+     name, Roboto Slab for author lists. Each keeps a real fallback so
+     the page holds up if Google Fonts is blocked. */
+  --body-font: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Google Sans", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
+
+  --pad: 2rem;                  /* page gutter, shared by the bar and content */
+  --pad-top: 1.5rem;            /* space above the name, on every page */
+  --prose: 72rem;               /* the centred content column */
+  --measure: 60rem;             /* cap on running text, for readability */
 }
 
-/* the site is always light — no dark-mode variant */
 html {
-  color-scheme: light;
+  color-scheme: light;          /* the site is light only */
   scroll-behavior: smooth;
 }
 
@@ -26,19 +36,13 @@ html {
 
 body {
   margin: 0;
-  padding: 2.5rem 3rem 5rem;
   background: var(--bg);
   color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
+  font-family: var(--body-font);
+  font-size: 18px;
   line-height: 1.65;
-  /* long words (e.g. the email) wrap instead of forcing a horizontal scroll */
+  /* long words (e.g. the email) wrap instead of forcing a sideways scroll */
   overflow-wrap: break-word;
-}
-
-.wrap {
-  max-width: var(--measure);
-  margin: 0 auto;
 }
 
 a {
@@ -47,6 +51,7 @@ a {
 }
 
 a:hover {
+  color: var(--link-hover);
   text-decoration: underline;
 }
 
@@ -55,80 +60,71 @@ img {
   height: auto;
 }
 
-/* ---------- header / nav ---------- */
+/* ============================================================
+   Top bar — name, tabs and social icons on one sticky line.
+   Used by index.html; the art page has its own simpler header.
+   ============================================================ */
 
-/* the masthead (photo + name + contact) is centred on the page;
-   the nav is a separate full-width bar below it (see `nav`) */
-header {
-  width: fit-content;
-  max-width: 100%;
-  margin: 0 auto 1.5rem;
-}
-
-/* photo+name+bio and contact, a gap between them, aligned on their height */
-.header-top {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 3rem;
-  margin-bottom: 1.25rem;
-}
-
-/* photo + name sit side by side */
-.header-id {
+.site-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bg);       /* opaque: content scrolls under it */
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: var(--pad-top) var(--pad);
+  /* closes the header, so it doesn't read as part of the text below */
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2rem;
 }
 
-.avatar {
-  flex: 0 0 auto;
-  width: 124px;
-  height: 124px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--line);
+.site-name {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
 }
 
-/* empty state: a grey circle with a faint silhouette */
-.avatar-placeholder {
-  background: #ececec url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23bcbcbc'%3E%3Ccircle cx='12' cy='9' r='4'/%3E%3Cpath d='M4 20c0-4 4-6.5 8-6.5s8 2.5 8 6.5z'/%3E%3C/svg%3E") center/58% no-repeat;
+.site-name:hover {
+  color: var(--text);
+  text-decoration: none;
 }
 
-header h1 {
-  margin: 0 0 .3rem;
-  font-size: 2.2rem;
-  font-weight: bold;
-  letter-spacing: .01em;
-}
-
-header .tagline {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
-header .contact {
-  margin: 0;
-  text-align: right;
-  font-size: .85rem;
-  line-height: 1.6;
-}
-
-header .contact-label {
-  display: block;
-  margin-bottom: .1rem;
+/* the tabs */
+.site-bar nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: var(--display);
   font-size: .95rem;
-  font-style: italic;
-  color: var(--muted);
 }
 
-/* social icons */
+.site-bar nav a {
+  color: var(--muted);
+  transition: color .15s;
+}
+
+.site-bar nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-bar nav a.active {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* the icons take the leftover space, which pins them to the right edge */
+.site-bar .social {
+  margin-left: auto;
+}
+
 .social {
   display: flex;
-  gap: .7rem;
-  justify-content: flex-end;
-  margin-top: .45rem;
+  gap: .9rem;
 }
 
 .social a {
@@ -141,7 +137,10 @@ header .contact-label {
   transform: translateY(-2px);
 }
 
+/* block, not inline: an inline SVG sits on the text baseline and carries
+   the descender space below it, padding the row's box */
 .social svg {
+  display: block;
   width: 20px;
   height: 20px;
   fill: currentColor;
@@ -152,109 +151,27 @@ header .contact-label {
 .social .sc:hover { color: #4285f4; }
 .social .li:hover { color: #0a66c2; }
 
-/* content-width bar that sticks to the top of the window while scrolling.
-   Same width as the body, so the scrolling content passes cleanly under it. */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: var(--bg);
-  max-width: var(--prose);
-  margin: 0 auto 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: .5rem 0;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: .8rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
+/* ============================================================
+   Page body — a centred column. The gallery page opts out of this
+   and runs full-bleed instead.
+   ============================================================ */
 
-nav a {
-  position: relative;
-  color: var(--muted);
-  transition: color .15s;
-}
-
-nav a:hover {
-  color: var(--text);
-  text-decoration: none;
-}
-
-/* current page: bold + darker + a solid accent bar underneath (other tabs
-   stay regular weight) */
-nav a.active {
-  color: var(--text);
-  font-weight: 700;
-}
-
-nav a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -.35rem;
-  height: 2px;
-  background: var(--text);
-}
-
-/* ---------- content ---------- */
-
-/* the body text sits in its own centred column, on the same axis as the header */
-main {
+.page {
   max-width: var(--prose);
   margin: 0 auto;
+  padding: 0 var(--pad) 5rem;
 }
 
-/* clear the sticky nav bar when jumping to a section anchor */
+/* clear the sticky bar when jumping to a section anchor */
 section[id] {
-  scroll-margin-top: 4rem;
+  scroll-margin-top: 5.5rem;
 }
 
-main h2 {
-  margin: 2.5rem 0 .75rem;
-  font-size: 1.15rem;
-  font-weight: normal;
-  font-style: italic;
-}
-
-main h2:first-child {
-  margin-top: 0;
-}
-
-/* major section divider (Publications, Projects) */
-main h2.section-title {
-  margin: 3.5rem 0 1.25rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
-  font-family: var(--display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: 0;
-}
-
-/* the section title owns the top gap, so its first sub-heading sits tight */
-.section-title + h2 {
-  margin-top: .5rem;
-}
-
-/* first heading on a page (e.g. CV): no divider line under the nav */
-main > .section-title:first-child {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-}
-
-main h3 {
-  margin: 1.5rem 0 .25rem;
-  font-size: 1rem;
-  font-weight: bold;
+/* running text stops before the line gets too long to track */
+p,
+ul,
+ol {
+  max-width: var(--measure);
 }
 
 p {
@@ -266,46 +183,68 @@ ul {
   padding-left: 1.25rem;
 }
 
-/* the frame is full-width, but running text stops before it gets unreadable */
-main p,
-main ul,
-main ol,
-.entry {
-  max-width: var(--prose);
-}
-
 li {
   margin-bottom: .35rem;
-}
-
-.muted {
-  color: var(--muted);
 }
 
 .small {
   font-size: .9rem;
 }
 
-/* ---------- entries (publications, projects, talks) ---------- */
+/* ---------- headings ---------- */
 
-.entry {
-  margin-bottom: 1.75rem;
+h2 {
+  margin: 2.5rem 0 .75rem;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
-/* card layout: teaser figure on the left, text on the right */
-.entry--card {
+/* major section divider (Publications, Projects) */
+h2.section-title {
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+/* the first heading on a page owns no divider and no top gap */
+.page > .section-title:first-child,
+.page > :first-child > .section-title:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+h3 {
+  margin: 1.5rem 0 .25rem;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* ============================================================
+   Entries — publications and projects.
+   ============================================================ */
+
+.entry {
   display: flex;
   align-items: flex-start;
   gap: 1.4rem;
+  margin-bottom: 1.75rem;
 }
 
 .entry-teaser {
   flex: 0 0 auto;
-  width: 190px;
+  width: 400px;
   aspect-ratio: 16 / 10;
-  object-fit: cover;
-  /* placeholder look for an empty <div>; a real <img> covers this */
-  background: #f0f0f0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 20' fill='%23c4c4c4'%3E%3Cpath d='M4 15l6-6 4 4 6-7 8 9z'/%3E%3Ccircle cx='11' cy='7' r='2'/%3E%3C/svg%3E") center / 45% no-repeat;
+  object-fit: contain;
+}
+
+/* placeholder look for an empty <div>; a real <img> just shows through */
+div.entry-teaser {
+  background: var(--fill) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 20' fill='%23c4c4c4'%3E%3Cpath d='M4 15l6-6 4 4 6-7 8 9z'/%3E%3Ccircle cx='11' cy='7' r='2'/%3E%3C/svg%3E") center / 45% no-repeat;
 }
 
 .entry-body {
@@ -317,298 +256,311 @@ li {
   margin-top: 0;
 }
 
-.entry .title {
-  font-weight: bold;
-}
-
+.entry .title,
 .entry .authors,
 .entry .venue,
 .entry .meta {
   display: block;
-  font-size: .92rem;
+}
+
+.entry .title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.entry .authors {
+  font-family: var(--serif);
+}
+
+.entry .venue,
+.entry .meta {
   color: var(--muted);
 }
 
+/* pill buttons: paper, code, poster… */
 .entry .links {
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: .85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .6rem;
 }
 
 .entry .links a {
-  margin-right: .55rem;
+  padding: .4rem 1rem;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--text);
+  font-size: .88rem;
+  font-weight: 600;
+  transition: background .15s;
+}
+
+.entry .links a:hover {
+  background: var(--fill-hover);
   text-decoration: none;
 }
 
-.entry .links a::before { content: "["; }
-.entry .links a::after  { content: "]"; }
+/* ============================================================
+   Art gallery — justified rows of images, plus a dark viewer.
+   ============================================================ */
 
-.entry .links a:hover {
-  text-decoration: underline;
-}
-
-/* news / updates list on the about page */
-.news {
-  list-style: none;
-  padding-left: 0;
-  font-size: .95rem;
-}
-
-.news li {
+/* The art page's header: just the name, linking home. Flex like .site-bar,
+   so the name sits on the same baseline (as a plain inline box it would
+   drop a few pixels, offset by the half-leading). */
+.gallery-header {
   display: flex;
-  gap: .75rem;
-  margin-bottom: .5rem;
-}
-
-.news .date {
-  flex: 0 0 5.5rem;
-  color: var(--muted);
-}
-
-/* ---------- image viewer (the original one) ---------- */
-
-.carousel {
-  margin: 1rem 0 2rem;
-}
-
-.viewer-main {
+  align-items: center;
+  padding: var(--pad-top) var(--pad) 0;
+  /* Above the viewer, so the name stays visible while an image is open.
+     The bar itself must not catch clicks though: it spans the full width
+     and would swallow the viewer's close button behind it. */
   position: relative;
-  background: #0a0a0a;
-  border: 1px solid var(--line);
-  overflow: hidden;
+  z-index: 1001;
+  pointer-events: none;
 }
 
-.viewer-img {
+/* the name is still clickable; only the empty bar around it is not */
+.gallery-header .site-name {
+  pointer-events: auto;
+}
+
+/* the gallery keeps the name's gutter on the sides, and the same gap above
+   it as the name has from the top of the page */
+.gallery-page {
+  padding: var(--pad) var(--pad) 4rem;
+}
+
+/* Justified rows: each image keeps its own proportions, and every row is
+   scaled to fill the width exactly. site.js sizes the tiles; these two
+   numbers steer it.
+     --gap     space between images
+     --across  how many images to fit on a row. Fractional is fine: 2.5
+               gives rows of 2 and 3. Narrow screens drop to one per row. */
+.gallery {
+  --gap: 4px;
+  --across: 2.5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+/* width and height are set per row by site.js */
+/* site.js sets width and height per row; the ratio here is only the
+   fallback used before the script runs, or if it never does */
+.tile {
+  position: relative;
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: contain;
-  cursor: zoom-in;
-}
-
-.viewer-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: .6rem 1rem;
-  background: rgba(0, 0, 0, .6);
-  color: #eee;
-  font-size: .85rem;
-}
-
-.viewer-caption:empty {
-  display: none;
-}
-
-.viewer-prev,
-.viewer-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  background: rgba(0, 0, 0, .4);
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  line-height: 1;
-  padding: .3rem .7rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--fill);
   cursor: pointer;
 }
 
-.viewer-prev:hover,
-.viewer-next:hover {
-  background: rgba(0, 0, 0, .7);
-}
-
-.viewer-prev { left: 0; }
-.viewer-next { right: 0; }
-
-/* horizontal, scrollable strip of landscape thumbnails */
-.viewer-thumbs {
-  display: flex;
-  gap: .5rem;
-  margin-top: .6rem;
-  overflow-x: auto;
-  padding-bottom: .4rem;
-}
-
-.viewer-thumbs .thumb {
-  flex-shrink: 0;
-  width: 90px;
-  height: 56px;
+.tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 2px solid transparent;
-  opacity: .5;
-  cursor: pointer;
-  transition: opacity .15s;
+  transition: transform .4s ease;
 }
 
-.viewer-thumbs .thumb.active {
-  border-color: var(--text);
+/* the title rides in on a scrim so it stays readable over any image */
+.tile::after {
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem 1.1rem;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, .65), rgba(0, 0, 0, .15) 45%, transparent 70%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.tile:hover img,
+.tile:focus-visible img {
+  transform: scale(1.04);
+}
+
+.tile:hover::after,
+.tile:focus-visible::after {
   opacity: 1;
 }
 
-.viewer-thumbs .thumb:hover {
-  opacity: .85;
+/* The note under the gallery: its rule spans the full width, while the
+   sentence inside keeps a readable line length. */
+.gallery-note {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
 }
 
-/* ---------- fullscreen lightbox (click the main image) ---------- */
-
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, .9);
-}
-
-.lightbox.open {
-  display: flex;
-}
-
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-}
-
-.lightbox-close,
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.lightbox-close:hover,
-.lightbox-prev:hover,
-.lightbox-next:hover {
-  color: #ccc;
-}
-
-.lightbox-prev,
-.lightbox-next {
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  padding: 0 1rem;
-}
-
-.lightbox-prev { left: 1rem; }
-.lightbox-next { right: 1rem; }
-
-.lightbox-close {
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 2.5rem;
-}
-
-/* ---------- software / tools ---------- */
-
-.software {
-  list-style: none;
-  padding-left: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.75rem;
-}
-
-.software li {
-  display: flex;
-  align-items: center;
-  gap: .55rem;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+/* full width, like the rule above it and the images above that — the
+   default cap on running text would leave it stranded on the left third */
+.gallery-note p {
+  max-width: none;
+  margin: 0;
   font-size: .9rem;
   color: var(--muted);
 }
 
-.software img {
-  width: 30px;
-  height: 30px;
+/* ---------- full-screen viewer ---------- */
+
+/* The viewer covers the gallery but leaves the page header showing, so the
+   name stays put while an image is open. Its own top band matches the
+   header's height, which is where the close button sits. */
+.viewer {
+  --viewer-pad: 1rem;          /* the frame around everything in the viewer */
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  background: #1c1c1c;
+  padding: var(--viewer-pad);
+}
+
+.viewer.open {
+  display: flex;
+}
+
+/* the header sits above the dark viewer, so its dark text has to lighten */
+body:has(.viewer.open) .site-name {
+  color: rgba(255, 255, 255, .85);
+}
+
+/* pinned to the corner, the same distance from the top as from the right */
+.viewer-close {
+  position: absolute;
+  top: var(--viewer-pad);
+  right: var(--viewer-pad);
+  padding: 0;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, .7);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .15s;
+}
+
+.viewer-close:hover {
+  color: #fff;
+}
+
+/* the image takes the space left over, clearing the header and the × above
+   it and the prev/next row below */
+.viewer-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: calc(var(--pad-top) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-stage img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
-/* ---------- footer ---------- */
+/* prev / next, centred under the image */
+.viewer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: .4rem;
+  padding: .9rem 0 1.1rem;
+  font-family: var(--display);
+  font-size: .95rem;
+}
 
-/* centred on the same axis as the header and body, so its delimitation
-   line lines up with the content instead of spanning the whole page */
+.viewer-controls button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: rgba(255, 255, 255, .75);
+  cursor: pointer;
+  transition: color .15s;
+}
+
+.viewer-controls button:hover {
+  color: #fff;
+}
+
+.viewer-sep {
+  color: rgba(255, 255, 255, .35);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
 footer {
-  max-width: var(--prose);
-  margin: 4rem auto 0;
+  max-width: var(--measure);
+  margin-top: 4rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
   font-size: .85rem;
   color: var(--muted);
 }
 
-/* ---------- small screens ---------- */
+/* on the gallery page the footer runs the full width, like the images */
+.gallery-page footer {
+  max-width: none;
+}
+
+/* ============================================================
+   Small screens
+   ============================================================ */
 
 @media (max-width: 560px) {
-  body {
-    padding: 2rem 1.25rem 4rem;
+  :root {
+    --pad: 1.25rem;
   }
 
-  /* full width, stack the contact block under the name */
-  header {
-    width: auto;
-  }
-
-  .header-top {
-    display: block;
-  }
-
-  /* smaller photo + name so the masthead fits a phone */
-  .avatar {
-    width: 84px;
-    height: 84px;
-  }
-
-  header h1 {
-    font-size: 1.75rem;
-  }
-
-  header .tagline {
-    font-size: .98rem;
-  }
-
-  header .contact {
-    margin-top: .85rem;
-    text-align: left;
-  }
-
-  .social {
-    justify-content: flex-start;
-  }
-
-  /* keep the sticky nav on one/two tidy rows */
-  nav {
-    justify-content: flex-start;
+  .site-bar {
     gap: 1rem;
-    font-size: .78rem;
   }
 
-  nav a {
-    display: inline-block;
-    margin-bottom: .2rem;
+  .site-bar nav {
+    gap: 1rem;
+    font-size: .85rem;
   }
 
-  main h2.section-title {
-    font-size: 1.2rem;
+  h2.section-title {
+    font-size: 1.5rem;
   }
 
-  /* stack the entry card: teaser on top, text below */
-  .entry--card {
+  /* stack the entry: teaser on top, text below */
+  .entry {
     flex-direction: column;
   }
 
   .entry-teaser {
     width: 100%;
     max-width: 300px;
+  }
+
+  /* no hover on touch, so the gallery titles stay visible */
+  .tile::after {
+    opacity: 1;
+  }
+
+  .viewer-stage {
+    padding: 4rem 1rem 4.5rem;
+  }
+
+  .viewer-prev,
+  .viewer-next {
+    font-size: 2rem;
   }
 }
