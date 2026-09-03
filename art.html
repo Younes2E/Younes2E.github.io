@@ -18,31 +18,52 @@
 
   <main class="gallery-page">
 
-    <!-- The gallery: one <a> per piece. The data-title is what shows on
-         hover and in the viewer, so edit it freely; to add a piece, copy a
-         line and point it at the new file in img/art/. -->
+    <!-- The gallery: one <a> per piece. To add one, copy a line and point it
+         at the new file in img/art/.
+
+         The title is written once, as the image's alt: site.js copies it onto
+         the tile, which is what shows on hover and in the viewer. So edit alt
+         and both follow.
+
+         Keep the width and height attributes accurate: they are the image's
+         real pixel size, and the row maths reads them before the file has
+         even loaded.
+
+         ROW BREAKS. By default the rows fill themselves — how many images
+         land on each one depends on their shapes and on --across in the CSS.
+         To settle a row yourself, drop a <br> between two tiles and it ends
+         there:
+
+             <a class="tile" ...></a>
+             <a class="tile" ...></a>
+             <br>                        <- this row holds two
+             <a class="tile" ...></a>
+
+         The two mix freely: mark only the breaks you care about, and the
+         images after them keep filling on their own. Either way every row is
+         stretched to fill the width exactly. -->
     <div class="gallery">
-      <a class="tile" href="img/art/1.jpg" data-title="Alley at Dusk"><img src="img/art/1.jpg" alt="Alley at Dusk" loading="lazy"></a>
-      <a class="tile" href="img/art/2.png" data-title="Backstreet"><img src="img/art/2.png" alt="Backstreet" loading="lazy"></a>
-      <a class="tile" href="img/art/8.png" data-title="Fire Escape"><img src="img/art/8.png" alt="Fire Escape" loading="lazy"></a>
-      <a class="tile" href="img/art/3.png" data-title="Rooftops"><img src="img/art/3.png" alt="Rooftops" loading="lazy"></a>
-      <a class="tile" href="img/art/6.jpg" data-title="Night Market"><img src="img/art/6.jpg" alt="Night Market" loading="lazy"></a>
-      <a class="tile" href="img/art/5.png" data-title="Underpass"><img src="img/art/5.png" alt="Underpass" loading="lazy"></a>
-      <a class="tile" href="img/art/4.png" data-title="Corner Store"><img src="img/art/4.png" alt="Corner Store" loading="lazy"></a>
-      <a class="tile" href="img/art/7.png" data-title="Fire Escape"><img src="img/art/7.png" alt="Fire Escape" loading="lazy"></a>
+      <a class="tile" href="img/art/1.jpg"><img src="img/art/1.jpg" alt="Rooftop" width="4096" height="2867" loading="lazy"></a>
+      <a class="tile" href="img/art/2.png"><img src="img/art/2.png" alt="Subway" width="1920" height="1080" loading="lazy"></a>
+      <br>
+      <a class="tile" href="img/art/4.png"><img src="img/art/4.png" alt="Corner Store" width="1920" height="1080" loading="lazy"></a>
+      <a class="tile" href="img/art/5.png"><img src="img/art/5.png" alt="Underpass" width="4096" height="2867" loading="lazy"></a>
+      <br>
+      <a class="tile" href="img/art/3.png"><img src="img/art/3.png" alt="Rooftops" width="1920" height="1080" loading="lazy"></a>
+      <a class="tile" href="img/art/6.jpg"><img src="img/art/6.jpg" alt="Night Market" width="2048" height="2048" loading="lazy"></a>
+      <br>
+      <a class="tile" href="img/art/8.png"><img src="img/art/8.png" alt="Fire Escape" width="2048" height="2048" loading="lazy"></a>
+      <a class="tile" href="img/art/7.png"><img src="img/art/7.png" alt="Fire Escape" width="1920" height="1080" loading="lazy"></a>
     </div>
 
     <div class="gallery-note">
       <p>
         I may work in AI, but all of my art remains human-generated. 
         <br>
-        I use Blender
-        for the modelling, texturing, lighting, and scene composition, and Photoshop
-        for sketching, texturing and color grading.
+        I use Blender for the modelling, texturing, lighting, and scene composition, and Photoshop for sketching, texturing and color grading.
       </p>
     </div>
 
-    <footer>Last updated: August 2026</footer>
 
   </main>
 

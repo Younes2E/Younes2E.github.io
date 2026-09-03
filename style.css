@@ -22,7 +22,7 @@
   --pad: 2rem;                  /* page gutter, shared by the bar and content */
   --pad-top: 1.5rem;            /* space above the name, on every page */
   --prose: 72rem;               /* the centred content column */
-  --measure: 60rem;             /* cap on running text, for readability */
+  --measure: 54rem;             /* cap on running text, for readability */
 }
 
 html {
@@ -39,9 +39,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--body-font);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.65;
-  /* long words (e.g. the email) wrap instead of forcing a sideways scroll */
   overflow-wrap: break-word;
 }
 
@@ -59,11 +58,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-/* ============================================================
-   Top bar — name, tabs and social icons on one sticky line.
-   Used by index.html; the art page has its own simpler header.
-   ============================================================ */
 
 .site-bar {
   position: sticky;
@@ -196,7 +190,7 @@ li {
 h2 {
   margin: 2.5rem 0 .75rem;
   font-family: var(--display);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
 
@@ -205,7 +199,7 @@ h2.section-title {
   margin: 3.5rem 0 1.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   font-weight: 700;
 }
 
@@ -220,7 +214,7 @@ h2.section-title {
 h3 {
   margin: 1.5rem 0 .25rem;
   font-family: var(--display);
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: bold;
 }
 
@@ -237,7 +231,7 @@ h3 {
 
 .entry-teaser {
   flex: 0 0 auto;
-  width: 400px;
+  width: 360px;
   aspect-ratio: 16 / 10;
   object-fit: contain;
 }
@@ -265,12 +259,25 @@ div.entry-teaser {
 
 .entry .title {
   font-family: var(--display);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
 .entry .authors {
   font-family: var(--serif);
+}
+
+/* A name that links to someone's page keeps the face and colour of the
+   names around it, so the line still reads as a list of people rather than
+   a row of blue links. Pointing at one is what gives it away. */
+.entry .authors a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.entry .authors a:hover {
+  color: var(--link);
+  text-decoration: underline;
 }
 
 .entry .venue,
@@ -287,11 +294,11 @@ div.entry-teaser {
 }
 
 .entry .links a {
-  padding: .4rem 1rem;
+  padding: .35rem .9rem;
   border-radius: 999px;
   background: var(--fill);
   color: var(--text);
-  font-size: .88rem;
+  font-size: .8rem;
   font-weight: 600;
   transition: background .15s;
 }
@@ -312,17 +319,6 @@ div.entry-teaser {
   display: flex;
   align-items: center;
   padding: var(--pad-top) var(--pad) 0;
-  /* Above the viewer, so the name stays visible while an image is open.
-     The bar itself must not catch clicks though: it spans the full width
-     and would swallow the viewer's close button behind it. */
-  position: relative;
-  z-index: 1001;
-  pointer-events: none;
-}
-
-/* the name is still clickable; only the empty bar around it is not */
-.gallery-header .site-name {
-  pointer-events: auto;
 }
 
 /* the gallery keeps the name's gutter on the sides, and the same gap above
@@ -341,21 +337,47 @@ div.entry-teaser {
   --gap: 4px;
   --across: 2.5;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--gap);
 }
 
-/* width and height are set per row by site.js */
-/* site.js sets width and height per row; the ratio here is only the
-   fallback used before the script runs, or if it never does */
+/* One row of images. site.js sets the row's height and gives each tile a
+   flex-grow equal to its aspect ratio; the browser then splits the row's
+   width in those proportions itself, to sub-pixel precision.
+   Nothing here is measured in pixels and nothing wraps, so a rounding
+   error can never drop a tile onto the next line — which is what broke
+   the old layout at anything other than 100% zoom. */
+.gallery-row {
+  display: flex;
+  gap: var(--gap);
+}
+
 .tile {
   position: relative;
   display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--fill);
   cursor: pointer;
+}
+
+/* in a row: share the width in proportion to flex-grow, set by site.js */
+.gallery-row .tile {
+  flex-shrink: 1;
+  flex-basis: 0;
+  min-width: 0;
+}
+
+/* row-break markers are instructions, never anything to look at; site.js
+   removes them, this just covers the moment before it runs */
+.gallery br,
+.gallery .row-break {
+  display: none;
+}
+
+/* before site.js runs, or if it never does: a plain full-width stack */
+.gallery:not(.is-justified) .tile {
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .tile img {
@@ -363,29 +385,27 @@ div.entry-teaser {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .4s ease;
 }
 
-/* the title rides in on a scrim so it stays readable over any image */
+/* On hover the whole image dims a little and its title sits in the middle.
+   The veil is even rather than a bottom gradient, so the title reads the
+   same wherever the image happens to be light or dark. */
 .tile::after {
   content: attr(data-title);
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: flex-end;
-  padding: 1rem 1.1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
   font-family: var(--display);
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(to top, rgba(0, 0, 0, .65), rgba(0, 0, 0, .15) 45%, transparent 70%);
+  background: rgba(0, 0, 0, .45);
   opacity: 0;
   transition: opacity .25s ease;
-}
-
-.tile:hover img,
-.tile:focus-visible img {
-  transform: scale(1.04);
 }
 
 .tile:hover::after,
@@ -412,34 +432,45 @@ div.entry-teaser {
 
 /* ---------- full-screen viewer ---------- */
 
-/* The viewer covers the gallery but leaves the page header showing, so the
-   name stays put while an image is open. Its own top band matches the
-   header's height, which is where the close button sits. */
+/* A self-contained panel: its own bar, its own image, its own controls.
+   It carries the name itself rather than letting the page's header show
+   through — that header scrolls with the page, so it was only ever in the
+   right place when the gallery happened to be at the top. */
 .viewer {
-  --viewer-pad: 1rem;          /* the frame around everything in the viewer */
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: none;
   flex-direction: column;
   background: #1c1c1c;
-  padding: var(--viewer-pad);
+  /* no side gutter here: only the bar keeps one, so the image below can use
+     the full width of the screen */
+  padding: var(--pad-top) 0 .75rem;
 }
 
 .viewer.open {
   display: flex;
 }
 
-/* the header sits above the dark viewer, so its dark text has to lighten */
-body:has(.viewer.open) .site-name {
-  color: rgba(255, 255, 255, .85);
+/* the name on the left, the × pushed to the right edge. The gutter matches
+   the page header's, so the name sits exactly where it did behind it. */
+.viewer-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 var(--pad);
 }
 
-/* pinned to the corner, the same distance from the top as from the right */
+.viewer-name {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .85);
+  white-space: nowrap;
+}
+
 .viewer-close {
-  position: absolute;
-  top: var(--viewer-pad);
-  right: var(--viewer-pad);
+  margin-left: auto;
   padding: 0;
   background: none;
   border: none;
@@ -454,39 +485,44 @@ body:has(.viewer.open) .site-name {
   color: #fff;
 }
 
-/* the image takes the space left over, clearing the header and the × above
-   it and the prev/next row below */
+/* the image takes whatever the bar and the arrows leave, with just enough
+   of a frame that it never touches the edges of the screen */
 .viewer-stage {
   flex: 1 1 auto;
   min-height: 0;
-  margin-top: calc(var(--pad-top) * 2);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: .75rem 1rem;
 }
 
+/* a light fade as each image arrives, so switching isn't an abrupt cut */
 .viewer-stage img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  opacity: 0;
+  transition: opacity .5s ease;
 }
 
-/* prev / next, centred under the image */
+.viewer-stage img.ready {
+  opacity: 1;
+}
+
+/* the two arrows, centred under the image */
 .viewer-controls {
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  gap: .4rem;
-  padding: .9rem 0 1.1rem;
-  font-family: var(--display);
-  font-size: .95rem;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 .viewer-controls button {
   background: none;
   border: none;
-  padding: 0;
-  font: inherit;
+  padding: 0 .5rem;
+  font-size: 2rem;
+  line-height: 1;
   color: rgba(255, 255, 255, .75);
   cursor: pointer;
   transition: color .15s;
@@ -494,10 +530,6 @@ body:has(.viewer.open) .site-name {
 
 .viewer-controls button:hover {
   color: #fff;
-}
-
-.viewer-sep {
-  color: rgba(255, 255, 255, .35);
 }
 
 /* ============================================================
@@ -555,12 +587,4 @@ footer {
     opacity: 1;
   }
 
-  .viewer-stage {
-    padding: 4rem 1rem 4.5rem;
-  }
-
-  .viewer-prev,
-  .viewer-next {
-    font-size: 2rem;
-  }
 }
