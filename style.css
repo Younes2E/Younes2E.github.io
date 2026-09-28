@@ -11,6 +11,7 @@
   --body-font: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --display: "Google Sans", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
+  --name-size: 1.35rem;
   --pad: 2rem;
   --pad-top: 1.5rem;
   --prose: 72rem;
@@ -68,14 +69,15 @@ img {
   margin-bottom: 2rem;
 }
 
-.site-name {
+.site-name,
+.viewer-name {
   font-family: var(--display);
-  font-size: 1.35rem;
+  font-size: var(--name-size);
   font-weight: 700;
-  color: var(--text);
   white-space: nowrap;
 }
 
+.site-name,
 .site-name:hover {
   color: var(--text);
   text-decoration: none;
@@ -152,38 +154,6 @@ img {
   color: var(--text);
 }
 
-@media (hover: none), (max-width: 560px) {
-  .sub {
-    display: none;
-  }
-}
-
-.social {
-  display: flex;
-  gap: .9rem;
-}
-
-.social a {
-  display: inline-flex;
-  color: var(--muted);
-  transition: color .15s, transform .15s;
-}
-
-.social a:hover {
-  transform: translateY(-2px);
-}
-
-.social svg {
-  display: block;
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-.social .gh:hover { color: #181717; }
-.social .sc:hover { color: #4285f4; }
-.social .li:hover { color: #0a66c2; }
-
 .page {
   width: 100%;
   max-width: var(--prose);
@@ -204,26 +174,13 @@ p {
   font-size: .9rem;
 }
 
-h2 {
-  margin: 2.5rem 0 .75rem;
-  font-family: var(--display);
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-h2.section-title {
+.section-title {
   margin: 3.5rem 0 1.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
+  font-family: var(--display);
   font-size: 1.7rem;
   font-weight: 700;
-}
-
-.page > .section-title:first-child,
-.page > :first-child > .section-title:first-child {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
 }
 
 .entry {
@@ -251,10 +208,6 @@ div.entry-teaser {
 .entry-body {
   flex: 1 1 auto;
   min-width: 0;
-}
-
-.entry-body > :first-child {
-  margin-top: 0;
 }
 
 .entry .title,
@@ -339,23 +292,21 @@ div.entry-teaser {
   gap: var(--gap);
 }
 
+.gallery br {
+  display: none;
+}
+
 .tile {
   position: relative;
   display: block;
   overflow: hidden;
   background: var(--fill);
-  cursor: pointer;
 }
 
 .gallery-row .tile {
   flex-shrink: 1;
   flex-basis: 0;
   min-width: 0;
-}
-
-.gallery br,
-.gallery .row-break {
-  display: none;
 }
 
 .gallery:not(.is-justified) .tile {
@@ -433,11 +384,7 @@ div.entry-teaser {
 }
 
 .viewer-name {
-  font-family: var(--display);
-  font-size: 1.35rem;
-  font-weight: 700;
   color: #fff;
-  white-space: nowrap;
 }
 
 .viewer-close {
@@ -464,7 +411,7 @@ div.entry-teaser {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--pad-top) + 1.35rem * 1.65 + .75rem) 3.5rem 1.5rem;
+  padding: calc(var(--pad-top) + var(--name-size) * 1.65 + .75rem) 3.5rem 1.5rem;
   overflow: hidden;
 }
 
@@ -495,11 +442,8 @@ div.entry-teaser {
   opacity: 1;
 }
 
-.viewer-controls {
-  display: contents;
-}
-
-.viewer-controls button {
+.viewer-prev,
+.viewer-next {
   position: absolute;
   top: 50%;
   z-index: 1;
@@ -524,7 +468,8 @@ div.entry-teaser {
   right: 0;
 }
 
-.viewer-controls button:hover {
+.viewer-prev:hover,
+.viewer-next:hover {
   opacity: 1;
 }
 
@@ -549,35 +494,64 @@ div.entry-teaser {
   color: #fff;
 }
 
-.site-footer .social a {
-  color: rgba(255, 255, 255, .6);
+.social {
+  display: flex;
+  gap: .9rem;
 }
 
-.site-footer .social .gh:hover {
-  color: #fff;
+.social a {
+  display: inline-flex;
+  color: rgba(255, 255, 255, .6);
+  transition: color .15s, transform .15s;
 }
+
+.social a:hover {
+  transform: translateY(-2px);
+}
+
+.social svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.social .gh:hover { color: #fff; }
+.social .sc:hover { color: #4285f4; }
+.social .li:hover { color: #0a66c2; }
 
 @media (max-width: 560px) {
   :root {
     --pad: 1.25rem;
   }
+
   .site-bar {
     gap: 1rem;
   }
+
   .site-bar nav,
-.gallery-header nav {
+  .gallery-header nav {
     gap: 1rem;
     font-size: .85rem;
   }
-  h2.section-title {
+
+  .section-title {
     font-size: 1.5rem;
   }
+
   .entry {
     flex-direction: column;
   }
+
   .entry-teaser {
     width: 100%;
     max-width: 300px;
+  }
+}
+
+@media (hover: none), (max-width: 560px) {
+  .sub {
+    display: none;
   }
 }
 

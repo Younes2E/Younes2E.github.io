@@ -45,17 +45,12 @@
     var breakAfter = [];
 
     [].slice.call(gallery.children).forEach(function (node) {
-      if (node.classList && node.classList.contains("tile")) {
-        var img = node.querySelector("img");
-        if (img && !node.hasAttribute("data-title")) {
-          node.setAttribute("data-title", img.getAttribute("alt") || "");
+      if (node.classList.contains("tile")) {
+        if (!node.hasAttribute("data-title")) {
+          node.setAttribute("data-title", node.querySelector("img").getAttribute("alt") || "");
         }
         tiles.push(node);
-        return;
-      }
-      var isMarker = node.tagName === "BR" ||
-                     (node.classList && node.classList.contains("row-break"));
-      if (isMarker) {
+      } else if (node.tagName === "BR") {
         if (tiles.length) breakAfter.push(tiles.length - 1);
         node.remove();
       }
@@ -72,9 +67,12 @@
       return 16 / 9;
     }
 
-    function layout() {
+    var lastWidth = 0;
+
+    function layout(settling) {
       var total = gallery.getBoundingClientRect().width;
       if (!total) return;
+      lastWidth = total;
 
       var styles = getComputedStyle(gallery);
       var gap = parseFloat(styles.getPropertyValue("--gap")) || 0;
@@ -86,8 +84,7 @@
 
       var target = (total / across) / averageRatio;
 
-      var maxRowHeight = parseFloat(styles.getPropertyValue("--max-row")) ||
-                         window.innerHeight * 0.8;
+      var maxRowHeight = window.innerHeight * 0.8;
 
       var single = total < 700;
 
@@ -135,7 +132,7 @@
             it.tile.style.flexGrow = "0";
             it.tile.style.flexBasis = (it.ratio * height) + "px";
           } else {
-            it.tile.style.flexGrow = it.ratio;
+            it.tile.style.flexGrow = it.ratio / ratios;
             it.tile.style.flexBasis = "";
           }
           el.appendChild(it.tile);
@@ -147,21 +144,23 @@
       gallery.innerHTML = "";
       gallery.appendChild(fragment);
       gallery.classList.add("is-justified");
+
+      if (!settling && gallery.getBoundingClientRect().width !== total) layout(true);
     }
 
     layout();
 
     var pending = false;
-    window.addEventListener("resize", function () {
-      if (pending) return;
+    new ResizeObserver(function () {
+      if (pending || gallery.getBoundingClientRect().width === lastWidth) return;
       pending = true;
       requestAnimationFrame(function () { pending = false; layout(); });
-    });
+    }).observe(gallery);
 
     tiles.forEach(function (tile) {
       var img = tile.querySelector("img");
       if (img.getAttribute("width") && img.getAttribute("height")) return;
-      if (!img.complete) img.addEventListener("load", layout);
+      if (!img.complete) img.addEventListener("load", function () { layout(); });
     });
 
     tiles.forEach(function (tile) {
@@ -192,10 +191,8 @@
       '<button class="viewer-close" type="button" aria-label="Close">&times;</button>' +
     '</div>' +
     '<div class="viewer-stage"><img alt=""></div>' +
-    '<div class="viewer-controls">' +
-      '<button class="viewer-prev" type="button" aria-label="Previous">&#8249;</button>' +
-      '<button class="viewer-next" type="button" aria-label="Next">&#8250;</button>' +
-    '</div>';
+    '<button class="viewer-prev" type="button" aria-label="Previous">&#8249;</button>' +
+    '<button class="viewer-next" type="button" aria-label="Next">&#8250;</button>';
   document.body.appendChild(viewer);
 
   var pageName = document.querySelector(".site-name");
@@ -248,8 +245,8 @@
     zoom.y = clampAxis(zoom.y, big.offsetHeight * zoom.s / 2, c.y - top, h, prev && prev.y);
   }
 
-  function applyZoom(mode, prev) {
-    if (mode !== "free") clampPan(prev);
+  function applyZoom(prev, noClamp) {
+    if (!noClamp) clampPan(prev);
     big.style.transform =
       "translate(" + zoom.x + "px, " + zoom.y + "px) scale(" + zoom.s + ")";
     stage.classList.toggle("zoomed", zoom.s > 1);
@@ -274,14 +271,16 @@
     zoom.x += cx * (1 - next / zoom.s);
     zoom.y += cy * (1 - next / zoom.s);
     zoom.s = next;
-    if (zoomingIn) applyZoom("free");
-    else applyZoom("relative", prev);
+    applyZoom(prev, zoomingIn);
   }, { passive: false });
 
   var drag = null;
   var dragged = false;
 
+  var downOnBackdrop = false;
+
   stage.addEventListener("pointerdown", function (e) {
+    downOnBackdrop = e.target === stage;
     if (zoom.s === 1 || e.button !== 0) return;
     drag = { px: e.clientX, py: e.clientY, x: zoom.x, y: zoom.y };
     dragged = false;
@@ -297,7 +296,7 @@
     var prev = { x: zoom.x, y: zoom.y };
     zoom.x = drag.x + dx;
     zoom.y = drag.y + dy;
-    applyZoom("relative", prev);
+    applyZoom(prev);
   });
 
   function endDrag() {
@@ -337,19 +336,14 @@
     });
   });
 
-  viewer.querySelector(".viewer-prev").onclick = function () { show(index - 1); };
-  viewer.querySelector(".viewer-next").onclick = function () { show(index + 1); };
-  viewer.querySelector(".viewer-close").onclick = close;
+  viewer.querySelector(".viewer-prev").addEventListener("click", function () { show(index - 1); });
+  viewer.querySelector(".viewer-next").addEventListener("click", function () { show(index + 1); });
+  viewer.querySelector(".viewer-close").addEventListener("click", close);
 
-  var downOnBackdrop = false;
-  stage.addEventListener("pointerdown", function (e) {
-    downOnBackdrop = e.target === stage;
-  }, true);
-
-  stage.onclick = function () {
+  stage.addEventListener("click", function () {
     if (downOnBackdrop && !dragged) close();
     dragged = false;
-  };
+  });
 
   document.addEventListener("keydown", function (e) {
     if (!viewer.classList.contains("open")) return;
