@@ -208,12 +208,25 @@
   big.draggable = false;
 
   var zoom = { s: 1, x: 0, y: 0 };
-  var MAX_ZOOM = 8;
+  function nativeScale() {
+    if (!big.naturalWidth) return 1;
+    var cs = getComputedStyle(big);
+    var shown = big.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    return big.naturalWidth / (shown * (window.devicePixelRatio || 1));
+  }
+
+  function maxZoom() {
+    return Math.max(2, nativeScale() * 4);
+  }
+
+  var shown = { x: 0, y: 0 };
 
   function baseCentre() {
+    var r = big.getBoundingClientRect();
+    var st = stage.getBoundingClientRect();
     return {
-      x: big.offsetLeft + big.offsetWidth / 2,
-      y: big.offsetTop + big.offsetHeight / 2
+      x: r.left + r.width / 2 - st.left - shown.x,
+      y: r.top + r.height / 2 - st.top - shown.y
     };
   }
 
@@ -249,7 +262,9 @@
     if (!noClamp) clampPan(prev);
     big.style.transform =
       "translate(" + zoom.x + "px, " + zoom.y + "px) scale(" + zoom.s + ")";
+    shown = { x: zoom.x, y: zoom.y };
     stage.classList.toggle("zoomed", zoom.s > 1);
+    big.classList.toggle("pixelated", zoom.s > Math.max(1, nativeScale()));
   }
 
   function resetZoom() {
@@ -259,7 +274,7 @@
 
   stage.addEventListener("wheel", function (e) {
     e.preventDefault();
-    var next = Math.min(MAX_ZOOM, Math.max(1, zoom.s * Math.exp(-e.deltaY * 0.0015)));
+    var next = Math.min(maxZoom(), Math.max(1, zoom.s * Math.exp(-e.deltaY * 0.0015)));
     if (next === zoom.s) return;
 
     var r = stage.getBoundingClientRect();

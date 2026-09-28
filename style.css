@@ -430,12 +430,15 @@ div.entry-teaser {
   opacity: 0;
   transition: opacity .5s ease;
   user-select: none;
-  will-change: transform;
 }
 
 .viewer-stage img.figure {
   background: #fff;
   padding: 1.5rem;
+}
+
+.viewer-stage img.pixelated {
+  image-rendering: pixelated;
 }
 
 .viewer-stage img.ready {
