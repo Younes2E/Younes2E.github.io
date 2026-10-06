@@ -167,6 +167,7 @@
       viewerItems.push({
         trigger: tile,
         src: tile.getAttribute("href"),
+        preview: tile.querySelector("img").src,
         title: tile.getAttribute("data-title") || ""
       });
     });
@@ -329,11 +330,21 @@
   function show(n) {
     index = (n + viewerItems.length) % viewerItems.length;
     var item = viewerItems[index];
+    var shownIndex = index;
     resetZoom();
     big.classList.remove("ready");
-    big.src = item.src;
+    big.src = item.preview || item.src;
     big.alt = item.title;
     big.classList.toggle("figure", !!item.figure);
+
+    if (!item.preview) return;
+    var full = new Image();
+    full.onload = function () {
+      if (index !== shownIndex) return;
+      big.src = item.src;
+      applyZoom();
+    };
+    full.src = item.src;
   }
 
   function close() {
