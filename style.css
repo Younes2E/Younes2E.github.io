@@ -188,20 +188,20 @@ p {
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
   font-family: var(--display);
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 
 .entry {
   display: flex;
   align-items: flex-start;
-  gap: 1.4rem;
-  margin-bottom: 1.75rem;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .entry-teaser {
   flex: 0 0 auto;
-  width: 360px;
+  width: 260px;
   aspect-ratio: 16 / 10;
   object-fit: contain;
 }
@@ -217,6 +217,7 @@ div.entry-teaser {
 .entry-body {
   flex: 1 1 auto;
   min-width: 0;
+  font-size: .9rem;
 }
 
 .entry .title,
@@ -228,7 +229,7 @@ div.entry-teaser {
 
 .entry .title {
   font-family: var(--display);
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
@@ -263,11 +264,11 @@ div.entry-teaser {
 }
 
 .entry .links a {
-  padding: .35rem .9rem;
+  padding: .3rem .8rem;
   border-radius: 999px;
   background: var(--fill);
   color: var(--text);
-  font-size: .8rem;
+  font-size: .75rem;
   font-weight: 600;
   transition: background .15s;
 }
@@ -553,7 +554,7 @@ div.entry-teaser {
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   .entry {
